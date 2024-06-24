@@ -8,7 +8,7 @@ export const SAMPLE_PRODICTS = [
 
     },
     {
-        id: 1,
+        id: 2,
         productNAme :"b",
         size : "s",
         color : "red",
@@ -16,7 +16,7 @@ export const SAMPLE_PRODICTS = [
 
     },
     {
-        id: 1,
+        id: 3,
         productNAme :"c",
         size : "s",
         color : "red",
@@ -24,7 +24,7 @@ export const SAMPLE_PRODICTS = [
 
     },
     {
-        id: 1,
+        id: 4,
         productNAme :"d",
         size : "s",
         color : "red",
@@ -32,7 +32,7 @@ export const SAMPLE_PRODICTS = [
 
     },
     {
-        id: 1,
+        id: 5,
         productNAme :"e",
         size : "s",
         color : "red",

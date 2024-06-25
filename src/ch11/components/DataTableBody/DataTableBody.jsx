@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./style.css";
 
-function DataTableBody({ mode, setMode, products, setProducts, isDeleting, setDeleting }) {
+function DataTableBody({ mode, setMode, products, setProducts, isDeleting, setDeleting, setEditProductId }) {
     const [viewProducts, setViewProducts] = useState([]);
     const [checkedAll, setCheckedAll] = useState(false);
 
     useEffect(() => {
         if (mode === 0) {
-            resetViedProducts();
+            resetViewProducts();
             setCheckedAll(false);
         }
     }, [products, mode]); // products가 변하는걸 체크함 mode 가 수정 / 삭제 등으로 변하면 확인
@@ -29,13 +29,20 @@ function DataTableBody({ mode, setMode, products, setProducts, isDeleting, setDe
                     const { isChecked, ...product } = viewProduct;
                     return product;
                 })
-            ])
+            ]);
             setMode(0);
-            setDeleting(false)
+            setDeleting(false);
         }
     }, [isDeleting]);
 
-    const resetViedProducts = () => {
+    useEffect(() => {
+        if (mode === 2) {
+            const [selectedProduct] = viewProducts.filter(product => product.isChecked) // [첫번째 요소] = 뷰프ㄹ덕트에서  필터(프로덕트 => 프로덕트가 체크면)
+            setEditProductId(!selectedProduct ? 0 : selectedProduct.id); //체크된게 있으면 프로덕트 아이디 넘겨줌
+        }
+    }, [viewProducts])
+
+    const resetViewProducts = () => {
         setViewProducts([...products.map(product => ({ ...product, isChecked: false }))])
     }
 
@@ -44,7 +51,7 @@ function DataTableBody({ mode, setMode, products, setProducts, isDeleting, setDe
             if (!checked) {
                 setViewProducts([...products.map(product => ({ ...product, isChecked: true }))])
             } else { // useEffect에서의 return : 언마운트기 때문에 else사용
-                resetViedProducts();
+                resetViewProducts();
             }
             return !checked;
         });
@@ -52,8 +59,8 @@ function DataTableBody({ mode, setMode, products, setProducts, isDeleting, setDe
 
     const handleCheckedChange = (e) => {
         if (mode === 2) {
-            setViewProducts(viewProducts => {
-                return [...viewProducts.map(product => {
+            setViewProducts(viewProducts => [
+                ...viewProducts.map(product => {
                     if (product.id === parseInt(e.target.value)) {
                         return {
                             ...product,
@@ -63,9 +70,9 @@ function DataTableBody({ mode, setMode, products, setProducts, isDeleting, setDe
                     return {
                         ...product,
                         isChecked: false
-                    };
-                })]
-            });
+                    }
+                })
+            ]);
         }
         if (mode === 3) {
             setViewProducts(viewProducts => {

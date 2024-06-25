@@ -1,7 +1,7 @@
 export const SAMPLE_PRODICTS = [
     {
         id: 1,
-        productNAme :"a",
+        productName :"a",
         size : "s",
         color : "red",
         price : 10000
@@ -9,7 +9,7 @@ export const SAMPLE_PRODICTS = [
     },
     {
         id: 2,
-        productNAme :"b",
+        productName :"b",
         size : "s",
         color : "red",
         price : 10000
@@ -17,7 +17,7 @@ export const SAMPLE_PRODICTS = [
     },
     {
         id: 3,
-        productNAme :"c",
+        productName :"c",
         size : "s",
         color : "red",
         price : 10000
@@ -25,7 +25,7 @@ export const SAMPLE_PRODICTS = [
     },
     {
         id: 4,
-        productNAme :"d",
+        productName :"d",
         size : "s",
         color : "red",
         price : 10000
@@ -33,11 +33,11 @@ export const SAMPLE_PRODICTS = [
     },
     {
         id: 5,
-        productNAme :"e",
+        productName :"e",
         size : "s",
         color : "red",
         price : 10000
 
     },
 
-]
+];

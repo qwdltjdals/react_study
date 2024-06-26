@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Swal from "sweetalert2";
 
@@ -7,13 +7,14 @@ function App() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [imgSrc, setImgSrc] = useState("");
-    const [inputData, setInputData] = useState("");
-    const [inputs, setInputs] = useState([name, email]);
+
 
     const emptyProfile = {
         name: "",
-        email: "",
+        email: ""
     }
+
+    const [users, setUsers] = useState({ ...emptyProfile });
 
 
     const handleSubmitClick = (e) => {
@@ -24,9 +25,20 @@ function App() {
             confirmButtonText: "예"
         }).then(result => {
             if (result.isConfirmed) {
-                handleInputChange(e);
+                
             }
         })
+    }
+
+    const handleInputChange2 = (e) => {
+        /*         const name = e.target.name;
+                const value = e.target.value; */
+        const { name, value } = e.target;
+        const newUsers = {
+            ...users,
+            [name]: value
+        }
+        setUsers(newUsers);
     }
 
     const handleImgSave = () => {
@@ -45,18 +57,18 @@ function App() {
     }
 
     const handleInputChange = (e) => { // (객체) / {함수의 몸체}
-        setInputData(e.target.value);
-        return setInputData;
+        setUsers(e.target.value);
+        return setUsers;
     }
 
     return (
         <div className="main-box">
             <div className="profile">프로필</div>
-            <div className="circle" onClick={handleImgSave }placeholder="사진">
+            <div className="circle" onClick={handleImgSave} placeholder="사진">
                 <img src={imgSrc} alt="" />
             </div>
-            <input name={name} type="text" onChange={handleInputChange} placeholder="이름" value={inputData.name} />
-            <input name={email} type="text" onChange={handleInputChange} placeholder="이메일" value={inputData.email} />
+            <input name={name} type="text" onChange={handleInputChange} placeholder="이름" value={users.name} />
+            <input name={email} type="text" onChange={handleInputChange} placeholder="이메일" value={users.email} />
             <button onClick={handleSubmitClick}>저장</button>
         </div>
     )

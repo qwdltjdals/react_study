@@ -1,11 +1,23 @@
 /** @jsxImportSource @emotion/react */
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import MainContainer from '../../components/MainContainer/MainContainer';
-import * as s from './style';
-import { RiH1 } from 'react-icons/ri';
 import RouteStudyPage from '../RouteStudyPage/RouteStudyPage';
 
 function RouteStudySubPage1(props) {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    console.log(location.pathname);
+    console.log(location.pathname.lastIndexOf("/"));
+    const index = location.pathname.lastIndexOf("/");
+    console.log(location.pathname.substring(index +1));
+
+    const handleAgeClick = () => {
+        navigate("/routestudy/page1/age");
+        // window.location.href = "https://naver.com" => replace:false
+        // window.location.replace = ("https://naver.com") => replace:true
+
+    }
     return (
         <MainContainer>
             <div>
@@ -16,6 +28,7 @@ function RouteStudySubPage1(props) {
                     <Link to={"/routestudy/page1/adress"}><li>주소</li></Link>
                     <Link to={"/routestudy"}><li>뒤로가기</li></Link>
                 </ul>
+                <button onClick={handleAgeClick}>나이</button>
                 <div>
                     <Routes>
                         <Route path="/name" element={<h1>이성민 </h1>} />

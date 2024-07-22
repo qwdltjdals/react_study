@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-function useinput() {
-    cpnst [ value, setValue] = useState("");
+function useInput() {
+    const [ value, setValue] = useState("");
 
     const onChange = (e) => {
         setValue(e.target.value);
@@ -9,4 +9,4 @@ function useinput() {
     return { value, setValue, onChange };
 }
 
-export default useinput;
+export default useInput;
